@@ -1,9 +1,14 @@
-HBoxContainer
-PanelContainer
+CheckBox
 VBoxContainer
+PanelContainer
 Label
-ColorPicker
+ScrollContainer
+MarginContainer
+SpinBox
 TextEdit
+HBoxContainer
+ColorRect
+ColorPicker
 HSlider
 Panel
 TextureButton

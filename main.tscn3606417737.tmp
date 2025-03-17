@@ -1,7 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bv3j8r375p7u2"]
 
 [ext_resource type="Script" uid="uid://6k0doavb5q3e" path="res://main.gd" id="1_2yw6j"]
-[ext_resource type="PackedScene" uid="uid://c6h8ulbjuj6xd" path="res://label.tscn" id="2_272bh"]
 [ext_resource type="Script" uid="uid://cdk8k72dcq2gv" path="res://header_bar.gd" id="2_rm6yv"]
 [ext_resource type="Script" uid="uid://cuhjie2rbjgns" path="res://quit.gd" id="2_xbx7i"]
 [ext_resource type="Texture2D" uid="uid://cmf55bwiu2wt0" path="res://UI/pin.png" id="3_l5o7m"]
@@ -31,33 +30,30 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.356863, 0.580392, 0.772549, 1)
 
-[node name="Window" type="PanelContainer" node_paths=PackedStringArray("color_list_ui")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="SystemFont" id="SystemFont_7mycd"]
+
+[node name="Window" type="PanelContainer"]
+offset_right = 768.0
+offset_bottom = 523.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_epjsj")
 script = ExtResource("1_2yw6j")
-color_label = ExtResource("2_272bh")
-color_list_ui = NodePath("div/Body/div/div/ColorList")
 
-[node name="div" type="VBoxContainer" parent="."]
+[node name="Controls" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Header" type="PanelContainer" parent="div"]
+[node name="Header" type="PanelContainer" parent="Controls"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_icixr")
 script = ExtResource("2_rm6yv")
 
-[node name="div" type="HBoxContainer" parent="div/Header"]
+[node name="HBox" type="HBoxContainer" parent="Controls/Header"]
 layout_mode = 2
 alignment = 2
 
-[node name="Pin" type="TextureButton" parent="div/Header/div"]
+[node name="Pin" type="TextureButton" parent="Controls/Header/HBox"]
 self_modulate = Color(0.878431, 0.878431, 0.878431, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -74,7 +70,7 @@ script = ExtResource("4_mb2uv")
 modulate_on = Color(0.443137, 0.737255, 0.988235, 1)
 modulate_off = Color(0.878431, 0.878431, 0.878431, 1)
 
-[node name="Quit" type="TextureButton" parent="div/Header/div"]
+[node name="Quit" type="TextureButton" parent="Controls/Header/HBox"]
 self_modulate = Color(0.878431, 0.878431, 0.878431, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -88,15 +84,15 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("2_xbx7i")
 
-[node name="Body" type="HBoxContainer" parent="div"]
+[node name="PanelContainer" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 
-[node name="ColorPicker" type="PanelContainer" parent="div/Body"]
+[node name="Picker" type="PanelContainer" parent="Controls/PanelContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5vkac")
 metadata/_edit_group_ = true
 
-[node name="ColorPicker" type="ColorPicker" parent="div/Body/ColorPicker"]
+[node name="ColorPicker" type="ColorPicker" parent="Controls/PanelContainer/Picker"]
 layout_mode = 2
 color = Color(0.466667, 0.466667, 0.466667, 1)
 color_mode = 3
@@ -105,51 +101,46 @@ can_add_swatches = false
 color_modes_visible = false
 presets_visible = false
 
-[node name="div" type="ScrollContainer" parent="div/Body"]
-custom_minimum_size = Vector2(240, 0)
+[node name="PanelContainer" type="VBoxContainer" parent="Controls/PanelContainer"]
 layout_mode = 2
 
-[node name="div" type="VBoxContainer" parent="div/Body/div"]
-layout_mode = 2
-
-[node name="div" type="MarginContainer" parent="div/Body/div/div"]
+[node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 
-[node name="div" type="VBoxContainer" parent="div/Body/div/div/div"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="div/Body/div/div/div/div"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Number of intermediate colors"
-
-[node name="TextEdit" type="SpinBox" parent="div/Body/div/div/div/div"]
-custom_minimum_size = Vector2(216, 36)
+[node name="TextEdit" type="SpinBox" parent="Controls/PanelContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 max_value = 10.0
 custom_arrow_step = 1.0
 
-[node name="CheckBox" type="CheckBox" parent="div/Body/div/div/div/div"]
-custom_minimum_size = Vector2(216, 0)
+[node name="MarginContainer2" type="MarginContainer" parent="Controls/PanelContainer/PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Hue takes the longer path"
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
 
-[node name="ColorList" type="VBoxContainer" parent="div/Body/div/div"]
-clip_contents = true
-custom_minimum_size = Vector2(0.005, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/PanelContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="ColorPicker2" type="PanelContainer" parent="div/Body"]
+[node name="ColorRect" type="ColorRect" parent="Controls/PanelContainer/PanelContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="Controls/PanelContainer/PanelContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(128, 36)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_7mycd")
+editable = false
+
+[node name="Picker2" type="PanelContainer" parent="Controls/PanelContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5vkac")
 metadata/_edit_group_ = true
 
-[node name="ColorPicker" type="ColorPicker" parent="div/Body/ColorPicker2"]
+[node name="ColorPicker" type="ColorPicker" parent="Controls/PanelContainer/Picker2"]
 layout_mode = 2
 color = Color(0.466667, 0.466667, 0.466667, 1)
 color_mode = 3
@@ -158,8 +149,7 @@ can_add_swatches = false
 color_modes_visible = false
 presets_visible = false
 
-[connection signal="gui_input" from="div/Header" to="div/Header" method="_on_gui_input"]
-[connection signal="color_changed" from="div/Body/ColorPicker/ColorPicker" to="." method="_on_color_picker_color_changed1"]
-[connection signal="value_changed" from="div/Body/div/div/div/div/TextEdit" to="." method="_on_text_edit_value_changed"]
-[connection signal="toggled" from="div/Body/div/div/div/div/CheckBox" to="." method="_on_check_box_toggled"]
-[connection signal="color_changed" from="div/Body/ColorPicker2/ColorPicker" to="." method="_on_color_picker_color_changed2"]
+[connection signal="gui_input" from="Controls/Header" to="Controls/Header" method="_on_gui_input"]
+[connection signal="color_changed" from="Controls/PanelContainer/Picker/ColorPicker" to="." method="_on_color_picker_color_changed1"]
+[connection signal="value_changed" from="Controls/PanelContainer/PanelContainer/MarginContainer/TextEdit" to="." method="_on_text_edit_value_changed"]
+[connection signal="color_changed" from="Controls/PanelContainer/Picker2/ColorPicker" to="." method="_on_color_picker_color_changed2"]

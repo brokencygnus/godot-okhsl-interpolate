@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6h8ulbjuj6xd"]
+
+[sub_resource type="SystemFont" id="SystemFont_kp246"]
+subpixel_positioning = 0
+
+[node name="ColorLabel" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+
+[node name="div" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="div"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="div" type="HBoxContainer" parent="div"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="div/div"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="div/div"]
+custom_minimum_size = Vector2(176, 36)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_kp246")
+editable = false
